@@ -1,0 +1,100 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+  font-size: 62.5%;
+}
+
+#body {
+  display: flex;
+  margin: 0 auto;
+}
+
+/* Menu*/
+header, nav, ul {
+  display: flex;
+  align-items: center;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  font-family: "Open Sans", sans-serif;
+  height: 6rem;
+  background-color: #DD765B;
+  margin: 0 auto;
+}
+
+header img {
+  margin-left: 4rem;
+  width: 6rem;
+  height: 6rem;
+}
+
+nav ul li {
+  font-size: 1.6rem;
+  font-weight: 400;
+  list-style: none;
+  margin-right: 4rem;
+  gap: 7rem;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #FFFFFF;
+}
+
+nav ul li a:hover{
+  color:#461306;
+}
+
+/*Home*/
+
+
+.studant {
+  height: 57.2rem;
+}
+
+.home-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 1fr;
+}
+
+.home-content section {
+  font-family: "Itim", cursive;
+  width: 57.3rem;
+  margin-left: 10rem;
+}
+
+.home-content section h1{
+  font-size: 4rem;
+  color: #252B42;
+  margin-bottom: 2rem;
+}
+
+.home-content section p {
+  font-size: 1.8rem;
+  color: #737373;
+}
+
+.home-content button a {
+  text-decoration: none;
+  color: #FFFFFF;
+}
+
+.home-content button {
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  background: #E84B23;
+  border: 0;
+  border-radius: 0.5rem;
+  margin-top: 8rem;
+  margin-left: 45rem;
+}
