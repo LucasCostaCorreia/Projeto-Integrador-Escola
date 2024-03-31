@@ -4,15 +4,34 @@
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 }
 
 :root {
   font-size: 62.5%;
+  font-family: "Itim", cursive
+}
+
+h2{
+  font-size: 4rem;
+  padding-bottom: 3rem;
+  color: #E84B23;
+}
+
+p {
+  font-size: 1.8rem;
+  color: #737373;
+  padding-bottom: 3rem;
 }
 
 #body {
   display: flex;
   margin: 0 auto;
+}
+
+.blue-bg {
+  background-image: url(/assets/background-blue.jpg);
+  background-position: center center;
 }
 
 /* Menu*/
@@ -23,6 +42,10 @@ header, nav, ul {
 
 header {
   display: flex;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+  border-bottom: 0.1rem solid #252B42;
   justify-content: space-between;
   font-family: "Open Sans", sans-serif;
   height: 6rem;
@@ -33,7 +56,7 @@ header {
 header img {
   margin-left: 4rem;
   width: 6rem;
-  height: 6rem;
+  height: 5.9rem;
 }
 
 nav ul li {
@@ -57,18 +80,18 @@ nav ul li a:hover{
 
 
 .studant {
-  height: 57.2rem;
+  min-height: 100vh;
+  overflow: hidden;
 }
 
 .home-content {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 1fr;
+  min-width: 100vh;
 }
 
 .home-content section {
-  font-family: "Itim", cursive;
   width: 57.3rem;
   margin-left: 10rem;
 }
@@ -84,7 +107,7 @@ nav ul li a:hover{
   color: #737373;
 }
 
-.home-content button a {
+a {
   text-decoration: none;
   color: #FFFFFF;
 }
@@ -97,4 +120,55 @@ nav ul li a:hover{
   border-radius: 0.5rem;
   margin-top: 8rem;
   margin-left: 45rem;
+}
+
+.home-content button:hover{
+  background: #af391c;
+}
+
+/* Consult */
+
+.consult-content {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  gap: 10rem;
+  padding: 0 15rem 0 15rem;
+}
+
+.consult-content button {
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  background: #E84B23;
+  border: 0;
+  border-radius: 0.5rem;
+  margin-top: 8rem;
+  margin-left: 45rem;
+}
+.consult-content button:hover {
+  background: #af391c;
+}
+
+/* About */
+
+.about {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  gap: 10rem;
+  padding: 0 15rem 0 15rem;
+}
+
+/* Footer */
+
+footer {
+  display: flex;
+  height: 5rem;
+  background-color: #E84B23;
+  justify-content: center;
+}
+
+footer p {
+  color: #FFFFFF;
+  margin-top: 1rem;
 }
