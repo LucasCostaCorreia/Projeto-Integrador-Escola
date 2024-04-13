@@ -1,0 +1,203 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+:root {
+  font-size: 62.5%;
+  font-family: "Itim", cursive;
+}
+
+img {display: block; width: 100%;}
+
+h2 {
+  font-size: 4rem;
+  padding-bottom: 3rem;
+  color: #e84b23;
+}
+
+p {
+  font-size: 1.8rem;
+  color: #737373;
+  padding-bottom: 3rem;
+}
+
+#body {
+  display: flex;
+  margin: 0 auto;
+}
+
+.blue-bg {
+  background-image: url(/static/assets/background-blue.jpg);
+  background-position: center center;
+}
+
+.indent {
+  max-width: 170rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Menu*/
+header,
+nav,
+ul {
+  display: flex;
+  align-items: center;
+}
+header {position: fixed; z-index: 1; height: 6rem; width: 100%; max-width: 100%;  background-color: #dd765b; border-bottom: 0.1rem solid #252b42;}
+
+header .container{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  font-family: "Open Sans", sans-serif;
+}
+
+header img {
+  width: 100%;
+  max-width: 6rem;
+  display: block;
+}
+
+nav ul li {
+  font-size: 1.6rem;
+  font-weight: 400;
+  list-style: none;
+  margin-right: 4rem;
+  gap: 7rem;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+nav ul li a:hover {
+  color: #461306;
+}
+
+/*Home*/
+
+.studant {
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.home-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 100vh;
+}
+
+.home-content section {
+  max-width: 57.3rem;
+  width: 100%;
+}
+
+.home-content section h1 {
+  font-size: 4rem;
+  color: #252b42;
+  margin-bottom: 2rem;
+}
+
+.home-content section p {
+  font-size: 1.8rem;
+  color: #737373;
+}
+
+a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.home-content button {
+  font-size: 1.75rem;
+  padding: 1.75rem;
+  background: #e84b23;
+  border: 0;
+  border-radius: 1rem;
+  margin-top: 8rem;
+  margin-left: 45rem;
+}
+
+.home-content button:hover {
+  background: #af391c;
+}
+
+/* Consult */
+
+.consult-content {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  gap: 10rem;
+  padding: 0 15rem 0 15rem;
+}
+
+.consult-content img {max-width: 575px;}
+
+.consult-content button {
+  font-size: 1.75rem;
+  padding: 1.5rem;
+  background: #e84b23;
+  border: 0;
+  border-radius: 1rem;
+  margin-top: 8rem;
+  margin-left: 45rem;
+}
+.consult-content button:hover {
+  background: #af391c;
+}
+
+/* About */
+
+.about {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  gap: 10rem;
+  padding: 0 15rem 0 15rem;
+}
+
+/* Consultas */
+/* <a href="https://www.freepik.com/free-photo/diverse-kids-reading-books_19085804.htm#fromView=search&page=1&position=4&uuid=aa544705-378a-423f-85b8-ea07694317b0">Image by rawpixel.com on Freepik</a> */
+#container_consultas {min-height: 100vh; width: 100%; display: flex; align-items: center; justify-content: center; background: url(./../assets/consultas-background.jpg) center center no-repeat; background-size: cover; backdrop-filter: blur(8px);}
+#container_consultas form {max-width: 500px; width: 100%; background-color: #FFF; box-shadow: 8px 8px 8px rgba(0, 0, 0, .25); border-radius: 20px; padding: 50px 80px;}
+#container_consultas form fieldset {border: none; display: flex; flex-direction: column; gap: 15px; margin-bottom: 25px;}
+#container_consultas form label,
+#container_consultas form input {display: block;}
+#container_consultas form label {user-select: none; font-size: 14px;}
+#container_consultas form input {padding: 10px; font-size: 14px; border-radius: 8px;}
+#container_consultas form button,
+#container_consultas form a { font-size: 16px; padding: 15px; color: #FFF; background: #e84b23; border: 0; border-radius: 8px; margin: 0 auto; display: block; user-select: none; width: fit-content;}
+
+
+/* Boletim Aluno */
+#container_aluno {min-height: 100vh; width: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; background: url(./../assets/consultas-background.jpg) center center no-repeat; background-size: cover; backdrop-filter: blur(8px);}
+
+#container_aluno .container_title h1 {font-size: 3rem; color: #FFF; font-weight: bold; text-align: center; margin-bottom: 15px;}
+#container_aluno .container_title p {font-size: 1.5rem; color: #FFF; margin-bottom: 7px; padding: 0; text-align: center;}
+#container_aluno .boletim {background-color: #FFF; border-radius: 20px; margin-top: 50px; padding: 2rem 4rem;}
+#container_aluno .boletim th {font-size: 2rem; text-align: center; font-weight: bold; padding: 10px 25px}
+#container_aluno .boletim td {font-size: 1.4rem; text-align: center; padding: 10px 25px; border-bottom: 1px solid #CCC}
+
+
+/* Footer */
+
+footer {
+  display: flex;
+  height: 5rem;
+  background-color: #e84b23;
+  justify-content: center;
+}
+
+footer p {
+  color: #ffffff;
+  margin-top: 1rem;
+}
