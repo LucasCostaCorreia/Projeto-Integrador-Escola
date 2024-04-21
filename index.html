@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -9,67 +10,118 @@
   <title>Escola</title>
 
 
-  <link href="https://fonts.googleapis.com/css2?family=Itim&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Itim&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-<div class="body">
+  <div class="body">
 
-    <header>
-      <img src="/assets/Logo.png" alt="Logo">
-      <nav>
+    <div class="menu">
+      <header>
+        <img src="/assets/Logo.png" alt="Logo">
 
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#consult">Consultar</a></li>
-        <li><a href="#about">Sobre</a></li>
-        <li><a href="/Professor.html">Area do Professor</a></li>
-      </ul>
-    </nav>
 
-    </header>
+        <nav>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#consult">Consultar</a></li>
+            <li><a href="#about">Sobre</a></li>
+            <li><a href="/Professor.html">Login</a></li>
+          </ul>
+        </nav>
 
-    <main>
-      <div id="home" class="home-content">
-      <section>
-        <h1>Bem vindo ao nosso programa para acompanhamento escolar</h1>
-        <p> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolore corrupti cum doloribus pariatur 
-          repudiandae obcaecati excepturi perspiciatis ab quo aspernatur sequi, accusantium qui id laborum labore eum voluptatibus ratione expedita.</p>
-
-        <button><a href="#"> Saiba +</a></button>
-
-        </section>
-        <img class="studant" src="/assets/img-person.png" alt="Uma estudante">
-      </div>
-
-      <div class="consult-content blue-bg" id="consult" >
-        <img src="/assets/consult-img.png" alt="Pessoa mexendo em seu notebook">
-      <section>
-        <h2>Consultar</h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium qui sit ex quaerat cumque sequi ipsa porro dolores explicabo facilis 
-          tenetur harum provident excepturi, odio minus. Autem dignissimos laborum ipsam!</p>
-
-          <button><a href="#">Consultar</a></button>
-      </section>
+      </header>
     </div>
 
-    <div class="about">
-      <section id="about">
-        <h2>Sobre Nós</h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut voluptate ipsa fuga quod quo quam non commodi odit fugit. Sint assumenda nisi 
-          quidem temporibus repellat libero dolorum. Ab, aliquid explicabo?</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea officiis voluptatum eaque voluptate itaque nihil dicta et nesciunt architecto iste soluta sit,
-             a, labore sapiente voluptas adipisci pariatur assumenda ipsum.</p>
-        </section>
-        <img src="/assets/about-img.png" alt="">
+    <div class="content">
+      <main>
+        <div id="home">
+
+          <div class="text-content">
+            <section>
+              <h1>Bem vindo ao nosso programa para acompanhamento escolar</h1>
+              <p> Bem-vindo ao nosso site de acompanhamento escolar para pais e responsáveis! Aqui, você terá acesso a
+                uma plataforma dedicada a manter os pais informados sobre as
+                atividades escolares de seus filhos.
+                <br>
+                Nosso objetivo é facilitar a comunicação entre a escola e os pais, garantindo assim um acompanhamento
+                mais eficiente e
+                uma participação ativa no processo educacional das crianças.
+                <br>
+                Junte-se a nós para uma parceria de sucesso no desenvolvimento acadêmico e pessoal dos seus filhos!
+                <br>
+              </p>
+              <button class="button"><a href="#about"> Saiba +</a></button>
+          </div>
+
+
+          </section>
+
+          <div class="img-content">
+            <img class="studant" src="/assets/img-person.png" alt="Uma estudante">
+          </div>
+
+        </div>
+
+        <div class="consult-content blue-bg" id="consult">
+
+          <div class="img-consult">
+            <img src="/assets/consult-img.png" alt="Pessoa mexendo em seu notebook">
+          </div>
+          <div class="text-content">
+            <section>
+              <h2>Consultar</h2>
+              <p>Ao consultar você terá acesso a todas as informações relevantes sobre as atividades escolares de seus
+                filhos.
+                <br>
+                Desde o calendário de eventos e datas importantes até o progresso nas disciplinas, notas e tarefas
+                pendentes,
+                nossa plataforma foi projetada para manter os pais informados e engajados no desenvolvimento acadêmico
+                de seus filhos.
+              </p>
+
+              <button class="button"><a href="#">Consultar</a></button>
+          </div>
+
+
+          </section>
+        </div>
+
+        <div id="about" class="about">
+
+          <section>
+            <div class="text-content">
+              <h2>Sobre Nós</h2>
+              <p>Os participantes deste projeto são estudantes dos cursos de Tecnologia, incluindo Engenharia de
+                Computação, Tecnologia da Informação e Ciência de Dados,
+                todos localizados no estado de São Paulo.
+                <br>
+                Nosso objetivo é compreender as necessidades da comunidade escolar e criar um ambiente que facilite o
+                contato dos
+                pais/responsáveis com as escolas.
+              </p>
+            </div>
+          </section>
+
+          <div class="img-about">
+            <img src="/assets/about-img.png" alt="">
+          </div>
+
+        </div>
+
+      </main>
+
     </div>
 
-    </main>
-    <footer>
-      <p>Copyright © 2024. All rights reserved.</p>
-    </footer>
 
 
-</div>  
+  </div>
+  <footer>
+    <p>Copyright © 2024. All rights reserved.</p>
+  </footer>
 </body>
+
 </html>
