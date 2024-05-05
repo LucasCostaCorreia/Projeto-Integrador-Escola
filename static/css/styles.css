@@ -71,6 +71,7 @@ header img {
 #modal .content .container {background-color: #FFF; padding: 2rem 4rem; border-radius: 20px; position: relative; max-width: 600px;}
 #modal .content .container .modal_title {color: #e84b23; font-weight: bold; font-size: 2rem; margin-bottom: 15px; text-align: center;}
 #modal .content .container p {font-size: 1.4rem; text-align: justify;}
+#modal .content .container p + p {margin-top: 10px;}
 #modal .content .container #close {position: absolute; top: 1rem; right: 2rem; font-weight: bold; font-size: 1.2rem; color: #e84b23;}
 
 nav {width: 100%; justify-content: center;}
