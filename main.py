@@ -19,11 +19,18 @@ def aluno():
 def professor(): 
     return render_template('professor.html')
 
-@app.route('/infos', methods=['POST'])
+@app.route('/painel')
+def painel(): 
+    return render_template('painel.html')
+
+@app.route('/login', methods=['POST'])
 def infos():
-    cpf_ra = request.form.get('cpf_ra')
-    print(cpf_ra)
-    return redirect('/')
+    login = request.form.get('login')
+    senha = request.form.get('senha')
+    if login == 'admin' and senha == 'admin':
+        return redirect('/painel')
+    else:
+        return redirect('/professor')
 
 if __name__ in "__main__":
     app.run(debug=True)
