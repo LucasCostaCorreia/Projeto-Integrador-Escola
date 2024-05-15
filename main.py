@@ -1,23 +1,11 @@
 from flask import Flask, render_template, redirect, request
-from flaskext.mysql import MySQL
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'PJI1102023;'
 
-mysql = MySQL()
-app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = ''
-app.config['MYSQL_DATABASE_DB'] = 'projeto_escola'
-app.config['MYSQL_DATABASE_HOST'] = 'localhost'
-mysql.init_app(app)
-
 @app.route('/')
 def home(): 
-    conn = mysql.connect()
-    cursor =conn.cursor()
-    cursor.execute("SELECT * from aluno")
-    data = cursor.fetchone()
-    return render_template('index.html', data = data)
+    return render_template('index.html')
 
 @app.route('/consultar')
 def consultar(): 

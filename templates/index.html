@@ -33,7 +33,7 @@
       </header>
 
       <main>
-        <!-- <div id="modal">
+        <div id="modal" class="open">
           <div class="content">
             <div class="container">
                 <a href="javascript:;" id="close">X</a>
@@ -56,18 +56,8 @@
                 </div>
               </div>
             </div>
-        </div> -->
-
-         <div id="modal">
-          <div class="content">
-            <div class="container">
-                <a href="javascript:;" id="close">X</a>
-                <div>
-                  {{data}}
-                </div>
-              </div>
-            </div>
         </div>
+
         <div id="home">
           <div class="indent">
             <div class="home-content">
@@ -136,5 +126,16 @@
         <p>Copyright © 2024. All rights reserved.</p>
       </footer>
     </div>
+    <script>
+        const modal = document.querySelector('#modal');
+        const closeModal = document.querySelector('#modal #close');
+
+        closeModal.addEventListener('click', () => {
+          modal.classList.remove('open');
+        })
+
+        
+
+    </script>
   </body>
 </html>
