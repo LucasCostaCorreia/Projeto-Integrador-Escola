@@ -207,6 +207,10 @@ form#infos a { font-size: 16px; padding: 15px; color: #FFF; background: #e84b23;
 #container_aluno .boletim td {font-size: 1.4rem; text-align: center; padding: 10px 25px; border-bottom: 1px solid #CCC}
 
 #container_painel {min-height: 100vh; width: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; background: url(../../static/assets/bg-teachers.webp) center center no-repeat; background-size: cover; backdrop-filter: blur(8px);}
+#container_painel .box-botoes {display: flex; align-items: center; justify-content: flex-end; margin-bottom: 50px; gap: 20px;}
+#container_painel .box-botoes a {padding: 10px 20px; color: #FFF; font-weight: bold; font-size: 1.2rem; border-radius: 15px; text-transform: uppercase;}
+#container_painel .box-botoes a:first-child {background-color: #e84b23;}
+#container_painel .box-botoes a:last-child {background-color: #737373; }
 #container_painel .box-infos {background-color: #FFF; padding: 30px; border-radius: 25px; max-width: 500px; width: 100%; margin: 0 auto 50px auto;}
 #container_painel .box-infos h1 {text-align: center; font-size: 3rem; margin: 0 0 20px;}
 #container_painel .box-infos h2 {text-align: center; font-size: 2.5rem; margin: 0; padding: 0;}
