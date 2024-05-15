@@ -15,6 +15,10 @@ def consultar():
 def aluno(): 
     return render_template('aluno.html')
 
+@app.route('/professor')
+def professor(): 
+    return render_template('professor.html')
+
 @app.route('/infos', methods=['POST'])
 def infos():
     cpf_ra = request.form.get('cpf_ra')
