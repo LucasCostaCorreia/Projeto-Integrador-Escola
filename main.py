@@ -1,11 +1,27 @@
 from flask import Flask, render_template, redirect, request
+import mysql.connector
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'PJI1102023;'
 
+conexao = mysql.connector.connect(
+    host="localhost",       # Endereço do servidor MySQL
+    user="root",     # Nome de usuário do MySQL
+    password="",   # Senha do MySQL
+    database="projeto_escola"  # Nome do banco de dados
+)
+
+if conexao.is_connected():
+    print("Conexão bem-sucedida!")
+
+cursor = conexao.cursor()
+
+
 @app.route('/')
 def home(): 
-    return render_template('index.html')
+    cursor.execute("SELECT * FROM alunos")
+    data = cursor.fetchall()
+    return render_template('index.html', data = data)
 
 @app.route('/consultar')
 def consultar(): 
