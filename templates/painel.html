@@ -1,119 +1,109 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Consultar Informações do Aluno</title>
-    <link
-      href="https://fonts.googleapis.com/css/2?family=Itim&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./../static/css/styles.css" />
-    <link rel="stylesheet" href="./../static/css/styles02.css" />
-  </head>
-  <body>
-    <div class="body">
-      <header>
-        <img src="/static/assets/Logo.webp" alt="Logo" />
-        <nav>
-          <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/consultar">Consultar</a></li>
-            <li><a href="#about">Sobre</a></li>
-            <li><a href="/professor">Area do Professor</a></li>
-          </ul>
-        </nav>
-      </header>
-      <main>
-        <section id="container_painel">
-          <div class="indent">
-            <div class="box-botoes">
-              <a href="javascript:;">Novo aviso</a>
-              <a href="javascript:;">Agendar reunião</a>
-            </div>
-            <div class="box-infos">
-              <h1><b>Matéria: </b>História</h1>
-              <h2><b>Bimestre: </b>2º</h>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Consultar Informações do Aluno</title>
+  <link
+    href="https://fonts.googleapis.com/css/2?family=Itim&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="./../static/css/styles.css" />
+  <link rel="stylesheet" href="./../static/css/home.css" />
+</head>
+
+<body>
+  <div class="body">
+    <header>
+      <img src="/static/assets/Logo.webp" alt="Logo" />
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/consultar">Consultar</a></li>
+          <li><a href="#about">Sobre</a></li>
+          <li><a href="/professor">Area do Professor</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section id="container_painel">
+        <div class="indent">
+          <div class="box-botoes">
+            <a href="javascript:;">Novo aviso</a>
+            <a href="javascript:;">Agendar reunião</a>
+          </div>
+          <div class="box-infos">
+            <h1><b>Matéria: </b>História</h1>
+            <h2><b>Bimestre: </b>2º</h>
               <h2><b>Professor: </b>João</h2>
-            </div>
-
-            <div class="box-alunos">
-              <h2>Alunos:</h2>
-
-              <a href="javascript:;">Felipe Marcelino</a>
-              <a href="javascript:;">Lucas Marcelino</a>
-              <a href="javascript:;">Cecilia Marcelino</a>
-              <a href="javascript:;">Monize Marcelino</a>
-            </div>
           </div>
-          <div id="modal">
-            <div class="content">
-              <div class="container">
-                <a href="javascript:;" id="close">X</a>
 
-                <form
-                  action="javascript:;"
-                  id="infos"
-                  method="#"
-                >
-                  <fieldset>
-                    <label for="nota">Nota</label>
-                    <input
-                      type="number"
-                      id="nota"
-                      name="nota"
-                      min="0"
-                      max="10"
-                      required
-                      placeholder="Informe a nota"
-                    />
-                  </fieldset>
-                  <fieldset>
-                    <label for="obs">Observações</label>
-                    <textarea id="obs" name="obs" rows="10" cols="50">
+          <div class="box-alunos">
+            <h2>Alunos:</h2>
+
+            <a href="javascript:;">Felipe Marcelino</a>
+            <a href="javascript:;">Lucas Marcelino</a>
+            <a href="javascript:;">Cecilia Marcelino</a>
+            <a href="javascript:;">Monize Marcelino</a>
+          </div>
+        </div>
+        <div id="modal">
+          <div class="content">
+            <div class="container">
+              <a href="javascript:;" id="close">X</a>
+
+              <form action="javascript:;" id="infos" method="#">
+                <fieldset>
+                  <label for="nota">Nota</label>
+                  <input type="number" id="nota" name="nota" min="0" max="10" required placeholder="Informe a nota" />
+                </fieldset>
+                <fieldset>
+                  <label for="obs">Observações</label>
+                  <textarea id="obs" name="obs" rows="10" cols="50">
                     </textarea>
-                  </fieldset>
-                  <a href="javascript:;" id="avaliar">Avaliar</a>
-                </form>
-              </div>
+                </fieldset>
+                <a href="javascript:;" id="avaliar">Avaliar</a>
+              </form>
             </div>
           </div>
-        </section>
-      </main>
-      <footer>
-        <p>Copyright © 2024. All rights reserved.</p>
-      </footer>
-    </div>
-    <script>
-      const alunos = document.querySelectorAll(".box-alunos a");
-      const modal = document.querySelector("#modal");
-      const closeModal = document.querySelector("#modal #close");
-      const avaliar = document.querySelector("#avaliar");
+        </div>
+      </section>
+    </main>
+    <footer>
+      <p>Copyright © 2024. All rights reserved.</p>
+    </footer>
+  </div>
+  <script>
+    const alunos = document.querySelectorAll(".box-alunos a");
+    const modal = document.querySelector("#modal");
+    const closeModal = document.querySelector("#modal #close");
+    const avaliar = document.querySelector("#avaliar");
 
-      alunos.forEach((aluno) => {
-        aluno.addEventListener("click", () => {
-          modal.classList.add("open");
-        });
+    alunos.forEach((aluno) => {
+      aluno.addEventListener("click", () => {
+        modal.classList.add("open");
       });
+    });
 
-      closeModal.addEventListener("click", () => {
-        modal.classList.remove("open");
-      });
+    closeModal.addEventListener("click", () => {
+      modal.classList.remove("open");
+    });
 
-      avaliar.addEventListener("click", () => {
-        var nota = document.getElementById("nota").value;
-        
-        if (nota.trim() === "") {
-            alert("Por favor, informe a nota.");
-          } else {
-            if(nota >= 0 && nota <= 10) {
-              modal.classList.remove("open");
-            } else {
-              alert("Nota inválida!");
-            }
+    avaliar.addEventListener("click", () => {
+      var nota = document.getElementById("nota").value;
+
+      if (nota.trim() === "") {
+        alert("Por favor, informe a nota.");
+      } else {
+        if (nota >= 0 && nota <= 10) {
+          modal.classList.remove("open");
+        } else {
+          alert("Nota inválida!");
         }
+      }
 
-      });
-    </script>
-  </body>
+    });
+  </script>
+</body>
+
 </html>

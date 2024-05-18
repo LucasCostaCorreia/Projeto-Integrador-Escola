@@ -4,24 +4,24 @@ import mysql.connector
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'PJI1102023;'
 
-conexao = mysql.connector.connect(
-    host="localhost",       # Endereço do servidor MySQL
-    user="root",     # Nome de usuário do MySQL
-    password="",   # Senha do MySQL
-    database="projeto_escola"  # Nome do banco de dados
-)
+# conexao = mysql.connector.connect(
+#     host="localhost",       # Endereço do servidor MySQL
+#     user="root",     # Nome de usuário do MySQL
+#     password="",   # Senha do MySQL
+#     database="projeto_escola"  # Nome do banco de dados
+# )
 
-if conexao.is_connected():
-    print("Conexão bem-sucedida!")
+# if conexao.is_connected():
+#     print("Conexão bem-sucedida!")
 
-cursor = conexao.cursor()
+# cursor = conexao.cursor()
 
 
 @app.route('/')
 def home(): 
-    cursor.execute("SELECT * FROM alunos")
-    data = cursor.fetchall()
-    return render_template('index.html', data = data)
+    # cursor.execute("SELECT * FROM alunos")
+    # data = cursor.fetchall()
+    return render_template('index.html')
 
 @app.route('/consultar')
 def consultar(): 
