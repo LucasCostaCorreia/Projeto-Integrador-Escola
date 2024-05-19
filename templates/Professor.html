@@ -1,69 +1,80 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-<head>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Area do professor</title>
 
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Area do professor</title>
-
-  <link
-    href="https://fonts.googleapis.com/css/2?family=Itim&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="./../static/css/styles.css" />
-  <link rel="stylesheet" href="./../static/css/home.css" />
-</head>
-
-<body>
+    <link
+      href="https://fonts.googleapis.com/css/2?family=Itim&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./../static/css/styles.css" />
+    <link rel="stylesheet" href="./../static/css/home.css" />
+  </head>
 
   <body>
-    <div class="body">
-      <header>
-        <img src="/static/assets/Logo.webp" alt="Logo" />
-        <nav>
-          <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/consultar">Consultar</a></li>
-            <li><a href="#about">Sobre</a></li>
-            <li><a href="/professor">Login</a></li>
-          </ul>
-        </nav>
-      </header>
-      <main>
-        <section id="container_consultas" class="teacher">
-          <form action="/login" id="infos" method="POST" onsubmit="return validateForm()">
-            <fieldset>
-              <label for="login">Login</label>
-              <input type="text" id="login" name="login" required placeholder="Informe seu login" />
-            </fieldset>
-            <fieldset>
-              <label for="senha">Senha</label>
-              <input type="password" id="senha" name="senha" required />
-            </fieldset>
-            <button type="submit">Logar</button>
-          </form>
-        </section>
-      </main>
-      <footer>
-        <p>Copyright © 2024. All rights reserved.</p>
-      </footer>
-    </div>
-    <script>
-      function validateForm() {
-        var login = document.getElementById("login").value;
-        var senha = document.getElementById("senha").value;
+    <body>
+      <div class="body">
+        <header>
+          <a href="/">
+            <img src="./../static/assets/Logo.webp" alt="Logo" />
+          </a>
+          <nav>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/consultar">Consultar</a></li>
+              <li><a href="/#about">Sobre</a></li>
+              <li><a href="/professor">Login</a></li>
+            </ul>
+          </nav>
+        </header>
+        <main>
+          <section id="container_consultas" class="teacher">
+            <form
+              action="/login"
+              id="infos"
+              method="POST"
+              onsubmit="return validateForm()"
+            >
+              <fieldset>
+                <label for="login">Login</label>
+                <input
+                  type="text"
+                  id="login"
+                  name="login"
+                  required
+                  placeholder="Informe seu login"
+                />
+              </fieldset>
+              <fieldset>
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" name="senha" required />
+              </fieldset>
+              <button type="submit">Logar</button>
+            </form>
+          </section>
+        </main>
+        <footer>
+          <p>Copyright © 2024. All rights reserved.</p>
+        </footer>
+      </div>
+      <script>
+        function validateForm() {
+          var login = document.getElementById("login").value;
+          var senha = document.getElementById("senha").value;
 
-        if (login.trim() === "" || senha.trim() === "") {
-          alert("Por favor, preencha todos os campos.");
-          return false;
+          if (login.trim() === "" || senha.trim() === "") {
+            alert("Por favor, preencha todos os campos.");
+            return false;
+          }
+
+          return true;
         }
-
-        return true;
-      }
-    </script>
+      </script>
+    </body>
   </body>
-</body>
-
 </html>

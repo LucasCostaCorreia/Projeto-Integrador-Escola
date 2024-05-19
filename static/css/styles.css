@@ -126,8 +126,7 @@ form#infos a {
 #container_aluno {
   min-height: 100vh;
   width: 100%;
-  margin-top: 8rem;
-  padding: 0;
+  padding: 50px 0;
 }
 
 .home-content {
@@ -140,6 +139,8 @@ form#infos a {
   background-size: cover;
   backdrop-filter: blur(8px);
 }
+
+#container_aluno .container_title:not(#container_aluno .container_title:first-child) {margin-top: 50px;}
 
 #container_aluno .container_title h1 {
   font-size: 3rem;
