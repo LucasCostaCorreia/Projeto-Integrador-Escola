@@ -30,24 +30,27 @@
     <main>
       <section id="container_painel">
         <div class="indent">
+          {% if professor %}
           <div class="box-botoes">
             <a href="javascript:;">Novo aviso</a>
             <a href="javascript:;">Agendar reunião</a>
           </div>
           <div class="box-infos">
-            <h1><b>Matéria: </b>História</h1>
+            <h1><b>Matéria: </b>{{ professor.materia }}</h1>
             <h2><b>Bimestre: </b>2º</h>
-              <h2><b>Professor: </b>João</h2>
+            <h2>{{ professor.nome }}</h2>
           </div>
 
+          {% if professor.alunos %}
           <div class="box-alunos">
             <h2>Alunos:</h2>
-
-            <a href="javascript:;">Felipe Marcelino</a>
-            <a href="javascript:;">Lucas Marcelino</a>
-            <a href="javascript:;">Cecilia Marcelino</a>
-            <a href="javascript:;">Monize Marcelino</a>
+            {% for aluno in professor.alunos %}
+              <a href="javascript:;" data-id="{{aluno.id_aluno}}">{{aluno.nome_aluno}}</a>
+            {% endfor %}
           </div>
+          {% else %}
+            <p class="erro">{{ erro_alunos }}</p>
+          {% endif %}
         </div>
         <div id="modal">
           <div class="content">
@@ -55,6 +58,7 @@
               <a href="javascript:;" id="close">X</a>
 
               <form action="javascript:;" id="infos" method="#">
+                <input type="hidden" name="aluno_id" id="aluno_id">
                 <fieldset>
                   <label for="nota">Nota</label>
                   <input type="number" id="nota" name="nota" min="0" max="10" required placeholder="Informe a nota" />
@@ -69,6 +73,9 @@
             </div>
           </div>
         </div>
+        {% else %}
+          <p class="erro">{{ erro }}</p>
+        {% endif %}
       </section>
     </main>
     <footer>
@@ -80,9 +87,11 @@
     const modal = document.querySelector("#modal");
     const closeModal = document.querySelector("#modal #close");
     const avaliar = document.querySelector("#avaliar");
+    let aluno_id = document.querySelector("#aluno_id");
 
     alunos.forEach((aluno) => {
-      aluno.addEventListener("click", () => {
+      aluno.addEventListener("click", function() {
+        aluno_id.value = this.dataset.id;
         modal.classList.add("open");
       });
     });

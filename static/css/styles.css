@@ -58,6 +58,9 @@
   box-shadow: none;
 }
 
+.erro {font-size: 18px; color: #e84b23; padding: 10px 20px; border-radius: 20px; background-color: #FFF; font-weight: bold; text-align: center;}
+.back {background-color: #FFF; color: #737373; text-align: center; padding: 10px 20px; border-radius: 20px; font-size: 18px; font-weight: bold; display: block; margin-top: 25px; text-decoration: none;}
+
 /* Consultas */
 /* <a href="https://www.freepik.com/free-photo/diverse-kids-reading-books_19085804.htm#fromView=search&page=1&position=4&uuid=aa544705-378a-423f-85b8-ea07694317b0">Image by rawpixel.com on Freepik</a> */
 #container_consultas {
@@ -71,6 +74,13 @@
   background-size: cover;
   backdrop-filter: blur(8px);
 }
+
+#container_consultas.teacher {
+  background: url(../../static/assets/bg-teachers.webp) center center
+  no-repeat;
+  background-size: cover;
+}
+
 form#infos {
   max-width: 500px;
   width: 100%;
@@ -133,7 +143,7 @@ form#infos a {
 #container_aluno .boletim th {font-size: 2rem; text-align: center; font-weight: bold; padding: 10px 25px}
 #container_aluno .boletim td {font-size: 1.4rem; text-align: center; padding: 10px 25px; border-bottom: 1px solid #CCC}
 
-#container_painel {min-height: 100vh; width: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; background: url(../../static/assets/bg-teachers.webp) center center no-repeat; background-size: cover; backdrop-filter: blur(8px);}
+#container_painel {padding: 50px 0; min-height: 100vh; width: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; background: url(../../static/assets/bg-teachers.webp) center center no-repeat; background-size: cover; backdrop-filter: blur(8px);}
 #container_painel .box-botoes {display: flex; align-items: center; justify-content: flex-end; margin-bottom: 50px; gap: 20px;}
 #container_painel .box-botoes a {padding: 10px 20px; color: #FFF; font-weight: bold; font-size: 1.2rem; border-radius: 15px; text-transform: uppercase;}
 #container_painel .box-botoes a:first-child {background-color: #e84b23;}

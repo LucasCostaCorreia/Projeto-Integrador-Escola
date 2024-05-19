@@ -41,10 +41,45 @@ def painel():
 
 @app.route('/login', methods=['POST'])
 def infos():
-    login = request.form.get('login')
+    email = request.form.get('login')
     senha = request.form.get('senha')
-    if login == 'professoramaria@example.com' and senha == 'admin':
-        return redirect('/painel')
+    if email == 'professoramaria@example.com' and senha == 'admin':
+        cursor = conexao.cursor(dictionary=True)
+        # Primeira query para buscar os professores
+        query = """
+        SELECT professores.nome, professores.id, materias.materia
+        FROM professores 
+        INNER JOIN materias ON materias.professores_id = professores.id 
+        WHERE professores.email = %s
+        """
+        cursor.execute(query, (email,))
+        professor = cursor.fetchone()
+        print(professor)
+        
+        if not professor:
+            cursor.close()
+            return render_template('painel.html', erro='Nenhum professor encontrado')
+
+        query_alunos = """
+        SELECT materias.materia, alunos.nome as nome_aluno, alunos.id as id_aluno
+        FROM materias 
+        INNER JOIN alunos_materias ON alunos_materias.materias_id = materias.id 
+        INNER JOIN alunos ON alunos.id = alunos_materias.alunos_id 
+        WHERE materias.professores_id = %s
+        GROUP BY alunos_materias.alunos_id
+        """
+        cursor.execute(query_alunos, (professor['id'],))
+        alunos = cursor.fetchall()
+
+        if not alunos:
+            cursor.close()
+            return render_template('painel.html', erro_alunos='Este professor ainda não dá aula!')
+
+        print(alunos)
+        professor['alunos'] = alunos
+
+        cursor.close()
+        return render_template('painel.html', professor=professor)
     else:
         return redirect('/professor')
 
@@ -68,7 +103,7 @@ def boletim():
 
     if not alunos:
         cursor.close()
-        return render_template('aluno.html', erro='Nenhum resultado encontrado')
+        return render_template('aluno.html', erro='Nenhum aluno encontrado')
 
     # Segunda query para buscar as notas para cada aluno
     resultados = []
@@ -89,6 +124,13 @@ def boletim():
 
     cursor.close()
     return render_template('aluno.html', alunos=resultados)
+
+@app.route('/avaliacao', methods=['POST'])
+def avaliacao():
+    aluno_id = request.form.get('aluno_id')
+    nota = request.form.get('nota')
+    obs = request.form.get('obs')
+
 
 if __name__ in "__main__":
     app.run(debug=True)

@@ -29,7 +29,7 @@
       </header>
       <main>
         <section id="container_aluno" class="home-content">
-          {% for aluno in alunos %}
+          {% if alunos %} {% for aluno in alunos %}
           <div class="container_title">
             <h1>Boletim do(a) aluno(a) {{ aluno.nome }}</h1>
             <h2>RA: {{ aluno.ra }}</h2>
@@ -49,17 +49,24 @@
               </tr>
             </thead>
             <tbody>
-              {% for materia in aluno.materias %}
+              {% if aluno.materias %} {% for materia in aluno.materias %}
               <tr>
                 <td>{{ materia.materia }}</td>
                 <td>100%</td>
                 <td>{{ materia.nota }}</td>
                 <td>{{ materia.observacao if materia.observacao else '-' }}</td>
               </tr>
-              {% endfor %}
+              {% endfor %} {% else %}
+              <tr>
+                <td colspan="4">Nenhuma matéria encontrada</td>
+              </tr>
+              {% endif %}
             </tbody>
           </table>
-          {% endfor %}
+          {% endfor %} {% else %}
+          <p class="erro">{{ erro }}</p>
+          <a href="/consultar" class="back">Voltar</a>
+          {% endif %}
         </section>
       </main>
       <footer>
