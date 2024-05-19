@@ -43,7 +43,7 @@ def painel():
 def infos():
     login = request.form.get('login')
     senha = request.form.get('senha')
-    if login == 'admin' and senha == 'admin':
+    if login == 'professoramaria@example.com' and senha == 'admin':
         return redirect('/painel')
     else:
         return redirect('/professor')
