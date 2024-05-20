@@ -98,7 +98,8 @@ form#infos fieldset {
 }
 form#infos label,
 form#infos input,
-form#infos textarea {
+form#infos textarea, 
+form#infos select {
   display: block;
   width: 100%;
   max-width: 100%;
@@ -108,7 +109,8 @@ form#infos label {
   font-size: 14px;
 }
 form#infos input,
-form#infos textarea {
+form#infos textarea,
+form#infos select {
   padding: 10px;
   font-size: 14px;
   border-radius: 8px;

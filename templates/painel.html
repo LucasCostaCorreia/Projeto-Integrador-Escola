@@ -47,6 +47,13 @@
             {% for aluno in professor.alunos %}
               <a href="javascript:;" data-id="{{aluno.id_aluno}}">{{aluno.nome_aluno}}</a>
             {% endfor %}
+            {% if sucesso %}
+                <p style="color: green;">{{ sucesso }}</p>
+            {% endif %}
+            
+            {% if erro %}
+                <p style="color: red;">{{ erro }}</p>
+            {% endif %}
           </div>
           {% else %}
             <p class="erro">{{ erro_alunos }}</p>
@@ -57,8 +64,20 @@
             <div class="container">
               <a href="javascript:;" id="close">X</a>
 
-              <form action="javascript:;" id="infos" method="#">
+              <form action="/avaliacao" id="infos" method="POST">
                 <input type="hidden" name="aluno_id" id="aluno_id">
+                <input type="hidden" name="materias_id" id="materias_id" value="{{ professor.id_materia }}">
+                <fieldset>
+                  <label for="bimestre">bimestre</label>
+                  <select name="bimestre" id="bimestre">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                  </select>
+                </fieldset>
                 <fieldset>
                   <label for="nota">Nota</label>
                   <input type="number" id="nota" name="nota" min="0" max="10" required placeholder="Informe a nota" />
@@ -66,9 +85,9 @@
                 <fieldset>
                   <label for="obs">Observações</label>
                   <textarea id="obs" name="obs" rows="10" cols="50">
-                    </textarea>
+                  </textarea>
                 </fieldset>
-                <a href="javascript:;" id="avaliar">Avaliar</a>
+                <button type="submit" id="avaliar">Avaliar</button>
               </form>
             </div>
           </div>
@@ -106,13 +125,32 @@
       if (nota.trim() === "") {
         alert("Por favor, informe a nota.");
       } else {
-        if (nota >= 0 && nota <= 10) {
-          modal.classList.remove("open");
-        } else {
+        if (nota <= 0 && nota >= 10) {
           alert("Nota inválida!");
         }
       }
+    });
 
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.querySelector('form#infos');
+      form.addEventListener('submit', function(evt) {
+        evt.preventDefault();
+        fetch(this.action, {
+          method: this.method,
+          body: new FormData(this)
+        }).then(resp => {
+          if (resp.ok) {
+            return resp.json();
+          }
+          throw new Error('Erro ao processar a solicitação.');
+        }).then(data => {
+          alert('Nota salva com sucesso!');
+          form.reset();
+          modal.classList.remove("open");
+        }).catch(error => {
+          alert('Ops! Houve um problema ao salvar a nota.');
+        });
+      });
     });
   </script>
 </body>

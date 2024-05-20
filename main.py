@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect, request, jsonify, request
 import mysql.connector
 
 app = Flask(__name__)
@@ -35,19 +35,15 @@ def aluno():
 def professor(): 
     return render_template('professor.html')
 
-@app.route('/painel')
-def painel(): 
-    return render_template('painel.html')
-
-@app.route('/login', methods=['POST'])
-def infos():
+@app.route('/painel', methods=['POST'])
+def painel():
     email = request.form.get('login')
     senha = request.form.get('senha')
     if email == 'professoramaria@example.com' and senha == 'admin':
         cursor = conexao.cursor(dictionary=True)
         # Primeira query para buscar os professores
         query = """
-        SELECT professores.nome, professores.id, materias.materia
+        SELECT professores.nome, professores.id, materias.materia, materias.id as id_materia
         FROM professores 
         INNER JOIN materias ON materias.professores_id = professores.id 
         WHERE professores.email = %s
@@ -125,11 +121,28 @@ def boletim():
     cursor.close()
     return render_template('aluno.html', alunos=resultados)
 
-@app.route('/avaliacao', methods=['POST'])
+@app.route('/avaliacao', methods=['GET', 'POST'])
 def avaliacao():
     aluno_id = request.form.get('aluno_id')
     nota = request.form.get('nota')
-    obs = request.form.get('obs')
+    observacao = request.form.get('obs')
+    materias_id = request.form.get('materias_id')
+    bimestre = request.form.get('bimestre')
+
+    cursor = conexao.cursor()
+    try:
+        insert_query = """
+        INSERT INTO alunos_materias (alunos_id, materias_id, nota, observacao, bimestre)
+        VALUES (%s, %s, %s, %s, %s)
+        """
+        cursor.execute(insert_query, (aluno_id, materias_id, nota, observacao, bimestre))
+        conexao.commit()
+        return jsonify(message='success')
+    except Exception as e:
+        conexao.rollback()
+        return jsonify(message='error')
+    finally:
+        cursor.close()
 
 
 if __name__ in "__main__":
