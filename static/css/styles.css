@@ -1,5 +1,6 @@
-/* Modal */
+.indent {max-width: 1650px; width: 90%;}
 
+/* Modal */
 #modal {
   position: fixed;
   top: 0;
@@ -57,6 +58,9 @@
   box-shadow: none;
 }
 
+.erro {font-size: 18px; color: #e84b23; padding: 10px 20px; border-radius: 20px; background-color: #FFF; font-weight: bold; text-align: center;}
+.back {background-color: #FFF; color: #737373; text-align: center; padding: 10px 20px; border-radius: 20px; font-size: 18px; font-weight: bold; display: block; margin-top: 25px; text-decoration: none;}
+
 /* Consultas */
 /* <a href="https://www.freepik.com/free-photo/diverse-kids-reading-books_19085804.htm#fromView=search&page=1&position=4&uuid=aa544705-378a-423f-85b8-ea07694317b0">Image by rawpixel.com on Freepik</a> */
 #container_consultas {
@@ -70,6 +74,13 @@
   background-size: cover;
   backdrop-filter: blur(8px);
 }
+
+#container_consultas.teacher {
+  background: url(../../static/assets/bg-teachers.webp) center center
+  no-repeat;
+  background-size: cover;
+}
+
 form#infos {
   max-width: 500px;
   width: 100%;
@@ -87,7 +98,8 @@ form#infos fieldset {
 }
 form#infos label,
 form#infos input,
-form#infos textarea {
+form#infos textarea, 
+form#infos select {
   display: block;
   width: 100%;
   max-width: 100%;
@@ -97,7 +109,8 @@ form#infos label {
   font-size: 14px;
 }
 form#infos input,
-form#infos textarea {
+form#infos textarea,
+form#infos select {
   padding: 10px;
   font-size: 14px;
   border-radius: 8px;
@@ -116,19 +129,34 @@ form#infos a {
   width: fit-content;
 }
 
-#container_consultas.teacher {
-  background: url(../../static/assets/bg-teachers.webp) center center no-repeat;
-  background-size: cover;
-  backdrop-filter: blur(8px);
-}
-
 /* Boletim Aluno */
 #container_aluno {
   min-height: 100vh;
   width: 100%;
-  margin-top: 8rem;
-  padding: 0;
+  padding: 50px 0;
 }
+
+/* Boletim Aluno */
+#container_aluno {min-height: 100vh; width: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; background: url(../../static/assets/consultas-background.webp) center center no-repeat; background-size: cover; backdrop-filter: blur(8px);}
+
+#container_aluno .container_title h1 {font-size: 3rem; color: #FFF; font-weight: bold; text-align: center; margin-bottom: 15px;}
+#container_aluno .container_title p {font-size: 1.5rem; color: #FFF; margin-bottom: 7px; padding: 0; text-align: center;}
+#container_aluno .boletim {background-color: #FFF; border-radius: 20px; margin-top: 50px; padding: 2rem 4rem;}
+#container_aluno .boletim th {font-size: 2rem; text-align: center; font-weight: bold; padding: 10px 25px}
+#container_aluno .boletim td {font-size: 1.4rem; text-align: center; padding: 10px 25px; border-bottom: 1px solid #CCC}
+
+#container_painel {padding: 50px 0; min-height: 100vh; width: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; background: url(../../static/assets/bg-teachers.webp) center center no-repeat; background-size: cover; backdrop-filter: blur(8px);}
+#container_painel .box-botoes {display: flex; align-items: center; justify-content: flex-end; margin-bottom: 50px; gap: 20px;}
+#container_painel .box-botoes a {padding: 10px 20px; color: #FFF; font-weight: bold; font-size: 1.2rem; border-radius: 15px; text-transform: uppercase;}
+#container_painel .box-botoes a:first-child {background-color: #e84b23;}
+#container_painel .box-botoes a:last-child {background-color: #737373; }
+#container_painel .box-infos {background-color: #FFF; padding: 30px; border-radius: 25px; max-width: 500px; width: 100%; margin: 0 auto 50px auto;}
+#container_painel .box-infos h1 {text-align: center; font-size: 3rem; margin: 0 0 20px;}
+#container_painel .box-infos h2 {text-align: center; font-size: 2.5rem; margin: 0; padding: 0;}
+#container_painel .box-alunos {background-color: #FFF; padding: 30px; border-radius: 25px; max-width: 500px; width: 100%; margin: 0 auto;}
+#container_painel .box-alunos h2 {text-align: center;}
+#container_painel .box-alunos a {font-size: 2rem; color: #000; font-weight: bold; display: block; text-align: center;}
+#container_painel .box-alunos a + a {margin-top: 15px;}
 
 .home-content {
   display: flex;
@@ -140,6 +168,8 @@ form#infos a {
   background-size: cover;
   backdrop-filter: blur(8px);
 }
+
+#container_aluno .container_title:not(#container_aluno .container_title:first-child) {margin-top: 50px;}
 
 #container_aluno .container_title h1 {
   font-size: 3rem;
@@ -172,38 +202,6 @@ form#infos a {
   text-align: center;
   padding: 10px 25px;
   border-bottom: 1px solid #ccc;
-}
-
-#container_painel {
-  min-height: 100vh;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background: url(../../static/assets/bg-teachers.webp) center center no-repeat;
-  background-size: cover;
-  backdrop-filter: blur(8px);
-}
-#container_painel .box-botoes {
-  display: flex;
-  min-height: 100vh;
-  align-items: center;
-  justify-content: flex-end;
-  margin-bottom: 50px;
-  gap: 20px;
-}
-#container_painel .box-botoes a {
-  padding: 10px 20px;
-  color: #fff;
-  font-weight: bold;
-  font-size: 1.2rem;
-  border-radius: 15px;
-  text-transform: uppercase;
-}
-#container_painel .box-botoes a:first-child {
-  background-color: #e84b23;
-  justify-content: center;
 }
 
 @media (min-width: 769px) {

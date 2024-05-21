@@ -15,12 +15,14 @@
 <body>
   <div class="body">
     <header>
-      <img src="/static/assets/Logo.webp" alt="Logo" />
+      <a href="/#home">
+        <img src="./../static/assets/Logo.webp" alt="Logo" />
+      </a>
       <nav>
         <ul>
           <li><a href="/">Home</a></li>
           <li><a href="/consultar">Consultar</a></li>
-          <li><a href="#about">Sobre</a></li>
+          <li><a href="/#about">Sobre</a></li>
           <li><a href="/professor">Area do Professor</a></li>
         </ul>
       </nav>
@@ -28,31 +30,54 @@
     <main>
       <section id="container_painel">
         <div class="indent">
+          {% if professor %}
           <div class="box-botoes">
             <a href="javascript:;">Novo aviso</a>
             <a href="javascript:;">Agendar reunião</a>
           </div>
           <div class="box-infos">
-            <h1><b>Matéria: </b>História</h1>
+            <h1><b>Matéria: </b>{{ professor.materia }}</h1>
             <h2><b>Bimestre: </b>2º</h>
-              <h2><b>Professor: </b>João</h2>
+            <h2>{{ professor.nome }}</h2>
           </div>
 
+          {% if professor.alunos %}
           <div class="box-alunos">
             <h2>Alunos:</h2>
-
-            <a href="javascript:;">Felipe Marcelino</a>
-            <a href="javascript:;">Lucas Marcelino</a>
-            <a href="javascript:;">Cecilia Marcelino</a>
-            <a href="javascript:;">Monize Marcelino</a>
+            {% for aluno in professor.alunos %}
+              <a href="javascript:;" data-id="{{aluno.id_aluno}}">{{aluno.nome_aluno}}</a>
+            {% endfor %}
+            {% if sucesso %}
+                <p style="color: green;">{{ sucesso }}</p>
+            {% endif %}
+            
+            {% if erro %}
+                <p style="color: red;">{{ erro }}</p>
+            {% endif %}
           </div>
+          {% else %}
+            <p class="erro">{{ erro_alunos }}</p>
+          {% endif %}
         </div>
         <div id="modal">
           <div class="content">
             <div class="container">
               <a href="javascript:;" id="close">X</a>
 
-              <form action="javascript:;" id="infos" method="#">
+              <form action="/avaliacao" id="infos" method="POST">
+                <input type="hidden" name="aluno_id" id="aluno_id">
+                <input type="hidden" name="materias_id" id="materias_id" value="{{ professor.id_materia }}">
+                <fieldset>
+                  <label for="bimestre">bimestre</label>
+                  <select name="bimestre" id="bimestre">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                  </select>
+                </fieldset>
                 <fieldset>
                   <label for="nota">Nota</label>
                   <input type="number" id="nota" name="nota" min="0" max="10" required placeholder="Informe a nota" />
@@ -60,13 +85,16 @@
                 <fieldset>
                   <label for="obs">Observações</label>
                   <textarea id="obs" name="obs" rows="10" cols="50">
-                    </textarea>
+                  </textarea>
                 </fieldset>
-                <a href="javascript:;" id="avaliar">Avaliar</a>
+                <button type="submit" id="avaliar">Avaliar</button>
               </form>
             </div>
           </div>
         </div>
+        {% else %}
+          <p class="erro">{{ erro }}</p>
+        {% endif %}
       </section>
     </main>
     <footer>
@@ -78,9 +106,11 @@
     const modal = document.querySelector("#modal");
     const closeModal = document.querySelector("#modal #close");
     const avaliar = document.querySelector("#avaliar");
+    let aluno_id = document.querySelector("#aluno_id");
 
     alunos.forEach((aluno) => {
-      aluno.addEventListener("click", () => {
+      aluno.addEventListener("click", function() {
+        aluno_id.value = this.dataset.id;
         modal.classList.add("open");
       });
     });
@@ -95,13 +125,32 @@
       if (nota.trim() === "") {
         alert("Por favor, informe a nota.");
       } else {
-        if (nota >= 0 && nota <= 10) {
-          modal.classList.remove("open");
-        } else {
+        if (nota <= 0 && nota >= 10) {
           alert("Nota inválida!");
         }
       }
+    });
 
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.querySelector('form#infos');
+      form.addEventListener('submit', function(evt) {
+        evt.preventDefault();
+        fetch(this.action, {
+          method: this.method,
+          body: new FormData(this)
+        }).then(resp => {
+          if (resp.ok) {
+            return resp.json();
+          }
+          throw new Error('Erro ao processar a solicitação.');
+        }).then(data => {
+          alert('Nota salva com sucesso!');
+          form.reset();
+          modal.classList.remove("open");
+        }).catch(error => {
+          alert('Ops! Houve um problema ao salvar a nota.');
+        });
+      });
     });
   </script>
 </body>

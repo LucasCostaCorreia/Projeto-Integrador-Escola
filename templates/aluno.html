@@ -1,100 +1,77 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Consultar Informações do Aluno</title>
+    <link
+      href="https://fonts.googleapis.com/css/2?family=Itim&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./../static/css/styles.css" />
+    <link rel="stylesheet" href="./../static/css/home.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Consultar Informações do Aluno</title>
-  <link
-    href="https://fonts.googleapis.com/css/2?family=Itim&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="./../static/css/styles.css" />
-  <link rel="stylesheet" href="./../static/css/home.css" />
-</head>
-
-<body>
-  <div class="body">
-    <header>
-      <img src="/static/assets/Logo.webp" alt="Logo" />
-      <nav>
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/consultar">Consultar</a></li>
-          <li><a href="#about">Sobre</a></li>
-          <li><a href="/professor">Area do Professor</a></li>
-        </ul>
-      </nav>
-    </header>
-    <main>
-      <section id="container_aluno">
-        <div class="container_title">
-          <h1>Boletim Felipe Marcelino</h1>
-          <div>
-            <p>Data de atualização: 13/04/2024 - 23:30:00</p>
-            <p>Americana - SP</p>
-            <p>EMEI Patativa</p>
+  <body>
+    <div class="body">
+      <header>
+        <a href="/#home">
+          <img src="./../static/assets/Logo.webp" alt="Logo" />
+        </a>
+        <nav>
+          <ul>
+            <li><a href="/#home">Home</a></li>
+            <li><a href="/consultar">Consultar</a></li>
+            <li><a href="/#about">Sobre</a></li>
+            <li><a href="/professor">Area do Professor</a></li>
+          </ul>
+        </nav>
+      </header>
+      <main>
+        <section id="container_aluno" class="home-content">
+          {% if alunos %} {% for aluno in alunos %}
+          <div class="container_title">
+            <h1>Boletim do(a) aluno(a) {{ aluno.nome }}</h1>
+            <h2>RA: {{ aluno.ra }}</h2>
+            <div>
+              <p>Data de atualização: 18/05/2024 - 23:30:00</p>
+              <p>Americana - SP</p>
+              <p>EMEI Patativa</p>
+            </div>
           </div>
-        </div>
-        <table class="boletim">
-          <thead>
-            <tr>
-              <th>Matéria</th>
-              <th>Frequência</th>
-              <th>Nota</th>
-              <th>Observações</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Português</td>
-              <td>99%</td>
-              <td>8</td>
-              <td>-</td>
-            </tr>
-            <tr>
-              <td>Matemática</td>
-              <td>99%</td>
-              <td>10</td>
-              <td>-</td>
-            </tr>
-            <tr>
-              <td>História</td>
-              <td>86%</td>
-              <td>7</td>
-              <td>-</td>
-            </tr>
-            <tr>
-              <td>Geografia</td>
-              <td>77%</td>
-              <td>7</td>
-              <td>-</td>
-            </tr>
-            <tr>
-              <td>Ciências</td>
-              <td>88%</td>
-              <td>10</td>
-              <td>-</td>
-            </tr>
-            <tr>
-              <td>Artes</td>
-              <td>74%</td>
-              <td>6</td>
-              <td>Não realizou 3 lições de casa</td>
-            </tr>
-            <tr>
-              <td>Educação Física</td>
-              <td>90%</td>
-              <td>10</td>
-              <td>-</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-    </main>
-    <footer>
-      <p>Copyright © 2024. All rights reserved.</p>
-    </footer>
-  </div>
-</body>
-
+          <table class="boletim">
+            <thead>
+              <tr>
+                <th>Matéria</th>
+                <th>Frequência</th>
+                <th>Nota</th>
+                <th>Observações</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if aluno.materias %} {% for materia in aluno.materias %}
+              <tr>
+                <td>{{ materia.materia }}</td>
+                <td>100%</td>
+                <td>{{ materia.nota }}</td>
+                <td>{{ materia.observacao if materia.observacao else '-' }}</td>
+              </tr>
+              {% endfor %} {% else %}
+              <tr>
+                <td colspan="4">Nenhuma matéria encontrada</td>
+              </tr>
+              {% endif %}
+            </tbody>
+          </table>
+          {% endfor %} {% else %}
+          <p class="erro">{{ erro }}</p>
+          <a href="/consultar" class="back">Voltar</a>
+          {% endif %}
+        </section>
+      </main>
+      <footer>
+        <p>Copyright © 2024. All rights reserved.</p>
+      </footer>
+    </div>
+  </body>
 </html>

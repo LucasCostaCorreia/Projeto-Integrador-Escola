@@ -30,10 +30,11 @@ p {
 
 body {
   margin: 0 auto;
+  user-select: none;
 }
 
 .blue-bg {
-  background-image: url(/static/assets/background-blue.jpg);
+  background-image: url(/static/assets/background-blue.webp);
   background-position: center center;
   background-size: cover;
 }
