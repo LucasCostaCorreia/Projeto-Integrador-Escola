@@ -1,4 +1,10 @@
 .indent {max-width: 1650px; width: 90%;}
+p#success {color: #50C878; opacity: 0; font-size: 14px; font-weight: bold; text-align: center; text-transform: uppercase; transition: all .4s ease;}
+p#error {color: #F00; opacity: 0; font-size: 14px; font-weight: bold; text-align: center; text-transform: uppercase; transition: all .4s ease;}
+
+p#success.show,
+p#error.show {opacity: 1; transition: all .4s ease;}
+
 
 /* Modal */
 #modal {
@@ -115,6 +121,10 @@ form#infos select {
   font-size: 14px;
   border-radius: 8px;
 }
+
+form#infos input:read-only,
+form#infos select:read-only {border: none; font-weight: bold; background-color: #CCC; user-select: none;}
+
 form#infos button,
 form#infos a {
   font-size: 16px;
@@ -128,6 +138,10 @@ form#infos a {
   user-select: none;
   width: fit-content;
 }
+
+form#infos #aluno_nome {font-size: 18px; text-align: center; margin-bottom: 20px; font-weight: bold;}
+form#infos #render_notas > div {display: flex; justify-content: space-between; align-items: center; gap: 10px;}
+form#infos #render_notas p {font-size: 12px; font-weight: bold; text-align: left;}
 
 /* Boletim Aluno */
 #container_aluno {
@@ -148,11 +162,14 @@ form#infos a {
 #container_painel {padding: 50px 0; min-height: 100vh; width: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; background: url(../../static/assets/bg-teachers.webp) center center no-repeat; background-size: cover; backdrop-filter: blur(8px);}
 #container_painel .box-botoes {display: flex; align-items: center; justify-content: flex-end; margin-bottom: 50px; gap: 20px;}
 #container_painel .box-botoes a {padding: 10px 20px; color: #FFF; font-weight: bold; font-size: 1.2rem; border-radius: 15px; text-transform: uppercase;}
+#container_painel .box-botoes a {background-color: #737373; }
 #container_painel .box-botoes a:first-child {background-color: #e84b23;}
-#container_painel .box-botoes a:last-child {background-color: #737373; }
 #container_painel .box-infos {background-color: #FFF; padding: 30px; border-radius: 25px; max-width: 500px; width: 100%; margin: 0 auto 50px auto;}
 #container_painel .box-infos h1 {text-align: center; font-size: 3rem; margin: 0 0 20px;}
 #container_painel .box-infos h2 {text-align: center; font-size: 2.5rem; margin: 0; padding: 0;}
+#container_painel .box-infos div {display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; margin-top: 30px;}
+#container_painel .box-infos div label {display: block; font-size: 1.5rem;}
+#container_painel .box-infos div select {padding: 10px; font-size: 14px; border-radius: 8px;}
 #container_painel .box-alunos {background-color: #FFF; padding: 30px; border-radius: 25px; max-width: 500px; width: 100%; margin: 0 auto;}
 #container_painel .box-alunos h2 {text-align: center;}
 #container_painel .box-alunos a {font-size: 2rem; color: #000; font-weight: bold; display: block; text-align: center;}

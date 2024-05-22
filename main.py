@@ -1,4 +1,6 @@
-from flask import Flask, render_template, redirect, request, jsonify, request
+from flask import Flask, render_template, redirect, request, url_for, flash, jsonify
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from werkzeug.security import generate_password_hash, check_password_hash
 import mysql.connector
 
 app = Flask(__name__)
@@ -16,12 +18,100 @@ if conexao.is_connected():
 
 cursor = conexao.cursor()
 
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
+
+admin_hashed_password = generate_password_hash('admin')
+
+class User(UserMixin):
+    def __init__(self, id, email, senha):
+        self.id = id
+        self.email = email
+        self.senha = senha
+
+    @staticmethod
+    def get(user_id):
+        cursor = conexao.cursor(dictionary=True)
+        query = "SELECT * FROM professores WHERE id = %s"
+        cursor.execute(query, (user_id,))
+        user = cursor.fetchone()
+        cursor.close()
+        if user:
+            return User(user['id'], user['email'], user['senha'])
+        return None
+
+    @staticmethod
+    def authenticate(email, senha):
+        cursor = conexao.cursor(dictionary=True)
+        query = "SELECT * FROM professores WHERE email = %s"
+        cursor.execute(query, (email,))
+        user = cursor.fetchone()
+        cursor.close()
+        if user and check_password_hash(admin_hashed_password, senha):
+            return User(user['id'], user['email'], user['senha'])
+        return None
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.get(user_id)
 
 @app.route('/')
 def home(): 
     cursor.execute("SELECT * FROM mensagem")
     data = cursor.fetchall()
     return render_template('index.html', avisos=data)
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        email = request.form['login']
+        senha = request.form['senha']
+        user = User.authenticate(email, senha)
+        if user:
+            login_user(user)
+            flash('Login bem-sucedido!', 'success')
+            return redirect(url_for('painel'))
+        else:
+            flash('Email ou senha incorretos.', 'danger')
+    return render_template('login.html')
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('Logout bem-sucedido!', 'success')
+    return redirect(url_for('login'))
+
+@app.route('/painel')
+@login_required
+def painel():
+    cursor = conexao.cursor(dictionary=True)
+        
+    professor_id = current_user.get_id()
+
+    query = """
+    SELECT professores.nome, professores.id, materias.materia, materias.id as id_materia
+    FROM professores 
+    INNER JOIN materias ON materias.professores_id = professores.id 
+    WHERE professores.id = %s
+    """
+    cursor.execute(query, (professor_id,))
+    professor = cursor.fetchone()
+
+    query_alunos = """
+    SELECT *
+    FROM alunos
+    """
+    cursor.execute(query_alunos,)
+    alunos = cursor.fetchall()
+    
+    if not alunos:
+        cursor.close()
+        return render_template('painel.html', erro_alunos='Este professor ainda não dá aula!')
+    
+    cursor.close()
+    return render_template('painel.html', professor=professor, alunos=alunos)
 
 @app.route('/consultar')
 def consultar(): 
@@ -30,54 +120,6 @@ def consultar():
 @app.route('/aluno')
 def aluno(): 
     return render_template('aluno.html')
-
-@app.route('/professor')
-def professor(): 
-    return render_template('professor.html')
-
-@app.route('/painel', methods=['POST'])
-def painel():
-    email = request.form.get('login')
-    senha = request.form.get('senha')
-    if email == 'professoramaria@example.com' and senha == 'admin':
-        cursor = conexao.cursor(dictionary=True)
-        # Primeira query para buscar os professores
-        query = """
-        SELECT professores.nome, professores.id, materias.materia, materias.id as id_materia
-        FROM professores 
-        INNER JOIN materias ON materias.professores_id = professores.id 
-        WHERE professores.email = %s
-        """
-        cursor.execute(query, (email,))
-        professor = cursor.fetchone()
-        print(professor)
-        
-        if not professor:
-            cursor.close()
-            return render_template('painel.html', erro='Nenhum professor encontrado')
-
-        query_alunos = """
-        SELECT materias.materia, alunos.nome as nome_aluno, alunos.id as id_aluno
-        FROM materias 
-        INNER JOIN alunos_materias ON alunos_materias.materias_id = materias.id 
-        INNER JOIN alunos ON alunos.id = alunos_materias.alunos_id 
-        WHERE materias.professores_id = %s
-        GROUP BY alunos_materias.alunos_id
-        """
-        cursor.execute(query_alunos, (professor['id'],))
-        alunos = cursor.fetchall()
-
-        if not alunos:
-            cursor.close()
-            return render_template('painel.html', erro_alunos='Este professor ainda não dá aula!')
-
-        print(alunos)
-        professor['alunos'] = alunos
-
-        cursor.close()
-        return render_template('painel.html', professor=professor)
-    else:
-        return redirect('/professor')
 
 @app.route('/boletim', methods=['POST'])
 def boletim():
@@ -114,14 +156,30 @@ def boletim():
         """
         cursor.execute(query_notas, (id,))
         materias = cursor.fetchall()
-        print(materias)
         aluno['materias'] = materias
         resultados.append(aluno)
 
     cursor.close()
     return render_template('aluno.html', alunos=resultados)
 
-@app.route('/avaliacao', methods=['GET', 'POST'])
+@app.route('/notas/<int:aluno_id>', methods=['GET'])
+@login_required
+def get_notas(aluno_id):
+    materias_id = request.args.get('materias_id')
+    bimestre = request.args.get('bimestre')
+    cursor = conexao.cursor(dictionary=True)
+    query = """
+    SELECT bimestre, nota, observacao
+    FROM alunos_materias
+    WHERE alunos_id = %s AND materias_id = %s AND bimestre = %s
+    """
+    cursor.execute(query, (aluno_id, materias_id, bimestre))
+    notas = cursor.fetchall()
+    cursor.close()
+    return jsonify(notas)
+
+@app.route('/avaliacao', methods=['POST'])
+@login_required
 def avaliacao():
     aluno_id = request.form.get('aluno_id')
     nota = request.form.get('nota')
@@ -131,16 +189,19 @@ def avaliacao():
 
     cursor = conexao.cursor()
     try:
-        insert_query = """
+        query = """
         INSERT INTO alunos_materias (alunos_id, materias_id, nota, observacao, bimestre)
         VALUES (%s, %s, %s, %s, %s)
+        ON DUPLICATE KEY UPDATE
+        nota = VALUES(nota),
+        observacao = VALUES(observacao)
         """
-        cursor.execute(insert_query, (aluno_id, materias_id, nota, observacao, bimestre))
+        cursor.execute(query, (aluno_id, materias_id, nota, observacao, bimestre))
         conexao.commit()
         return jsonify(message='success')
     except Exception as e:
         conexao.rollback()
-        return jsonify(message='error')
+        return jsonify(message='error', error=str(e))
     finally:
         cursor.close()
 

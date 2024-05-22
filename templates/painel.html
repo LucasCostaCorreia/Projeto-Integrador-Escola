@@ -1,158 +1,199 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Consultar Informações do Aluno</title>
+    <link
+      href="https://fonts.googleapis.com/css/2?family=Itim&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./../static/css/styles.css" />
+    <link rel="stylesheet" href="./../static/css/home.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Consultar Informações do Aluno</title>
-  <link
-    href="https://fonts.googleapis.com/css/2?family=Itim&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="./../static/css/styles.css" />
-  <link rel="stylesheet" href="./../static/css/home.css" />
-</head>
-
-<body>
-  <div class="body">
-    <header>
-      <a href="/#home">
-        <img src="./../static/assets/Logo.webp" alt="Logo" />
-      </a>
-      <nav>
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/consultar">Consultar</a></li>
-          <li><a href="/#about">Sobre</a></li>
-          <li><a href="/professor">Area do Professor</a></li>
-        </ul>
-      </nav>
-    </header>
-    <main>
-      <section id="container_painel">
-        <div class="indent">
-          {% if professor %}
-          <div class="box-botoes">
-            <a href="javascript:;">Novo aviso</a>
-            <a href="javascript:;">Agendar reunião</a>
-          </div>
-          <div class="box-infos">
-            <h1><b>Matéria: </b>{{ professor.materia }}</h1>
-            <h2><b>Bimestre: </b>2º</h>
-            <h2>{{ professor.nome }}</h2>
-          </div>
-
-          {% if professor.alunos %}
-          <div class="box-alunos">
-            <h2>Alunos:</h2>
-            {% for aluno in professor.alunos %}
-              <a href="javascript:;" data-id="{{aluno.id_aluno}}">{{aluno.nome_aluno}}</a>
-            {% endfor %}
-            {% if sucesso %}
-                <p style="color: green;">{{ sucesso }}</p>
-            {% endif %}
-            
-            {% if erro %}
-                <p style="color: red;">{{ erro }}</p>
-            {% endif %}
-          </div>
-          {% else %}
+  <body>
+    <div class="body">
+      <header>
+        <a href="/#home">
+          <img src="./../static/assets/Logo.webp" alt="Logo" />
+        </a>
+        <nav>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/consultar">Consultar</a></li>
+            <li><a href="/#about">Sobre</a></li>
+            <li><a href="/login">Area do Professor</a></li>
+          </ul>
+        </nav>
+      </header>
+      <main>
+        <section id="container_painel">
+          <div class="indent">
+            {% if professor %}
+            <div class="box-botoes">
+              <a href="javascript:;">Novo aviso</a>
+              <a href="javascript:;">Agendar reunião</a>
+              <a href="/logout">Logout</a>
+            </div>
+            <div class="box-infos">
+              <h1><b>Matéria: </b>{{ professor.materia }}</h1>
+              <h2>{{ professor.nome }}</h2>
+              <div>
+                <label for="bimestre_filter">Selecione o Bimestre</label>
+                <select name="bimestre_filter" id="bimestre_filter">
+                  <option value="">Selecione...</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                </select>
+              </div>
+            </div>
+            {% else %}
+            <p class="erro">{{ erro }}</p>
+            {% endif %} {% if alunos %}
+            <div class="box-alunos">
+              <p id="success">Nota salva com sucesso!</p>
+              <p id="error">Nota salva com sucesso!</p>
+              <h2>Alunos:</h2>
+              {% for aluno in alunos %}
+              <a href="javascript:;" data-id="{{aluno.id}}">{{aluno.nome}}</a>
+              {% endfor %}
+            </div>
+            {% else %}
             <p class="erro">{{ erro_alunos }}</p>
-          {% endif %}
-        </div>
+            {% endif %}
+          </div>
+        </section>
         <div id="modal">
           <div class="content">
             <div class="container">
               <a href="javascript:;" id="close">X</a>
-
               <form action="/avaliacao" id="infos" method="POST">
-                <input type="hidden" name="aluno_id" id="aluno_id">
-                <input type="hidden" name="materias_id" id="materias_id" value="{{ professor.id_materia }}">
+                <input type="hidden" name="aluno_id" id="aluno_id" />
+                <input
+                  type="hidden"
+                  name="materias_id"
+                  id="materias_id"
+                  value="{{ professor.id_materia }}"
+                />
+                <h3 id="aluno_nome"></h3>
+
                 <fieldset>
-                  <label for="bimestre">bimestre</label>
-                  <select name="bimestre" id="bimestre">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                  </select>
+                  <label for="bimestre">Bimestre</label>
+                  <input type="text" readonly name="bimestre" id="bimestre" />
                 </fieldset>
                 <fieldset>
                   <label for="nota">Nota</label>
-                  <input type="number" id="nota" name="nota" min="0" max="10" required placeholder="Informe a nota" />
+                  <input
+                    type="number"
+                    id="nota"
+                    name="nota"
+                    min="0"
+                    max="10"
+                    required
+                    placeholder="Informe a nota"
+                  />
                 </fieldset>
                 <fieldset>
                   <label for="obs">Observações</label>
-                  <textarea id="obs" name="obs" rows="10" cols="50">
-                  </textarea>
+                  <textarea id="obs" name="obs" rows="10" cols="50"></textarea>
                 </fieldset>
                 <button type="submit" id="avaliar">Avaliar</button>
               </form>
             </div>
           </div>
         </div>
-        {% else %}
-          <p class="erro">{{ erro }}</p>
-        {% endif %}
-      </section>
-    </main>
-    <footer>
-      <p>Copyright © 2024. All rights reserved.</p>
-    </footer>
-  </div>
-  <script>
-    const alunos = document.querySelectorAll(".box-alunos a");
-    const modal = document.querySelector("#modal");
-    const closeModal = document.querySelector("#modal #close");
-    const avaliar = document.querySelector("#avaliar");
-    let aluno_id = document.querySelector("#aluno_id");
+      </main>
+      <footer>
+        <p>Copyright © 2024. All rights reserved.</p>
+      </footer>
+    </div>
+    <script>
+      const alunos = document.querySelectorAll(".box-alunos a");
+      const modal = document.querySelector("#modal");
+      const closeModal = document.querySelector("#modal #close");
+      const aluno_nome = document.querySelector("#aluno_nome");
+      const aluno_id_input = document.querySelector("#aluno_id");
+      const materias_id_input = document.querySelector("#materias_id");
+      const nota_input = document.querySelector("#nota");
+      const obs_input = document.querySelector("#obs");
+      let bimestre_input = document.querySelector("#bimestre");
+      const bimestre_filter = document.querySelector("#bimestre_filter");
 
-    alunos.forEach((aluno) => {
-      aluno.addEventListener("click", function() {
-        aluno_id.value = this.dataset.id;
-        modal.classList.add("open");
+      bimestre_input.value = bimestre_filter.value;
+
+      bimestre_filter.addEventListener("change", function () {
+        bimestre_input.value = this.value;
       });
-    });
 
-    closeModal.addEventListener("click", () => {
-      modal.classList.remove("open");
-    });
+      alunos.forEach((aluno) => {
+        aluno.addEventListener("click", function () {
+          const aluno_id = this.dataset.id;
+          const aluno_nome_text = this.textContent;
+          aluno_id_input.value = aluno_id;
+          aluno_nome.textContent = aluno_nome_text;
 
-    avaliar.addEventListener("click", () => {
-      var nota = document.getElementById("nota").value;
+          fetch(
+            `/notas/${aluno_id}?materias_id=${materias_id_input.value}&bimestre=${bimestre_filter.value}`
+          )
+            .then((response) => response.json())
+            .then((notas) => {
+              if (notas.length > 0) {
+                notas.forEach((nota) => {
+                  if (nota.bimestre == bimestre_input.value) {
+                    nota_input.value = nota.nota;
+                    obs_input.value = nota.observacao;
+                  }
+                });
+              } else {
+                nota_input.value = "";
+                obs_input.value = "";
+              }
+            });
 
-      if (nota.trim() === "") {
-        alert("Por favor, informe a nota.");
-      } else {
-        if (nota <= 0 && nota >= 10) {
-          alert("Nota inválida!");
-        }
-      }
-    });
-
-    document.addEventListener('DOMContentLoaded', function() {
-      const form = document.querySelector('form#infos');
-      form.addEventListener('submit', function(evt) {
-        evt.preventDefault();
-        fetch(this.action, {
-          method: this.method,
-          body: new FormData(this)
-        }).then(resp => {
-          if (resp.ok) {
-            return resp.json();
-          }
-          throw new Error('Erro ao processar a solicitação.');
-        }).then(data => {
-          alert('Nota salva com sucesso!');
-          form.reset();
-          modal.classList.remove("open");
-        }).catch(error => {
-          alert('Ops! Houve um problema ao salvar a nota.');
+          modal.classList.add("open");
         });
       });
-    });
-  </script>
-</body>
 
+      closeModal.addEventListener("click", () => {
+        modal.classList.remove("open");
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.querySelector("form#infos");
+
+        form.addEventListener("submit", function (evt) {
+          evt.preventDefault();
+          fetch(this.action, {
+            method: this.method,
+            body: new FormData(this),
+          })
+            .then((resp) => {
+              if (resp.ok) {
+                return resp.json();
+              }
+              throw new Error("Erro ao processar a solicitação.");
+            })
+            .then((data) => {
+              success.classList.add("show");
+              setTimeout(function () {
+                success.classList.remove("show");
+              }, 1500);
+              form.reset();
+              modal.classList.remove("open");
+            })
+            .catch((error) => {
+              error.classList.add("show");
+              setTimeout(function () {
+                error.classList.remove("show");
+              }, 1500);
+            });
+        });
+      });
+    </script>
+  </body>
 </html>
