@@ -1,3 +1,16 @@
+@font-face {
+  font-family: 'Itim';
+  src: url('./../fonts/Itim-Regular.eot');
+  src: url('./../fonts/Itim-Regular.eot?#iefix') format('embedded-opentype'),
+      url('./../fonts/Itim-Regular.woff2') format('woff2'),
+      url('./../fonts/Itim-Regular.woff') format('woff'),
+      url('./../fonts/Itim-Regular.ttf') format('truetype'),
+      url('./../fonts/Itim-Regular.svg#Itim-Regular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -31,6 +44,7 @@ p {
 body {
   margin: 0 auto;
   user-select: none;
+  overflow-x: hidden;
 }
 
 .blue-bg {
@@ -51,6 +65,8 @@ body {
 
 .body {
   max-width: 100%;
+  width: 100%;
+  overflow-x: hidden;
 }
 /* Menu*/
 
@@ -203,4 +219,25 @@ footer p {
     align-items: center;
     justify-content: center;
   }
+}
+
+@media (max-width: 800px) {
+  h2 {
+    font-size: 2rem;
+    margin: 1.5rem 0;
+  }
+  
+  p {
+    font-size: 1.4rem;
+  }
+  
+  nav ul {
+    gap: 1rem;
+  }
+  
+  nav ul li {
+    font-size: 1.1rem;
+    margin-right: 0;
+  }
+
 }

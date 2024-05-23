@@ -87,6 +87,8 @@ p#error.show {opacity: 1; transition: all .4s ease;}
   background-size: cover;
 }
 
+#container_consultas form#infos {margin: 0 auto;}
+
 form#infos {
   max-width: 500px;
   width: 100%;
@@ -144,18 +146,13 @@ form#infos #render_notas > div {display: flex; justify-content: space-between; a
 form#infos #render_notas p {font-size: 12px; font-weight: bold; text-align: left;}
 
 /* Boletim Aluno */
-#container_aluno {
-  min-height: 100vh;
-  width: 100%;
-  padding: 50px 0;
-}
+#container_aluno {min-height: 100vh; padding: 50px 0; width: 100%; max-width: 100%; overflow-x: hidden; display: flex; align-items: center; justify-content: center; flex-direction: column; background: url(../../static/assets/consultas-background.webp) center center no-repeat; background-size: cover; backdrop-filter: blur(8px);}
+#container_aluno .indent > section {max-width: 100%; width: 100%;}
 
-/* Boletim Aluno */
-#container_aluno {min-height: 100vh; width: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; background: url(../../static/assets/consultas-background.webp) center center no-repeat; background-size: cover; backdrop-filter: blur(8px);}
-
+#container_aluno .container_title {max-width: fit-content; width: 100%; margin: 0 auto;}
 #container_aluno .container_title h1 {font-size: 3rem; color: #FFF; font-weight: bold; text-align: center; margin-bottom: 15px;}
 #container_aluno .container_title p {font-size: 1.5rem; color: #FFF; margin-bottom: 7px; padding: 0; text-align: center;}
-#container_aluno .boletim {background-color: #FFF; border-radius: 20px; margin-top: 50px; padding: 2rem 4rem;}
+#container_aluno .boletim {background-color: #FFF; border-radius: 20px; margin: 50px auto 0; padding: 2rem 4rem; max-width: fit-content; width: 100%;}
 #container_aluno .boletim th {font-size: 2rem; text-align: center; font-weight: bold; padding: 10px 25px}
 #container_aluno .boletim td {font-size: 1.4rem; text-align: center; padding: 10px 25px; border-bottom: 1px solid #CCC}
 
@@ -188,38 +185,6 @@ form#infos #render_notas p {font-size: 12px; font-weight: bold; text-align: left
 
 #container_aluno .container_title:not(#container_aluno .container_title:first-child) {margin-top: 50px;}
 
-#container_aluno .container_title h1 {
-  font-size: 3rem;
-  color: #fff;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 15px;
-}
-#container_aluno .container_title p {
-  font-size: 1.5rem;
-  color: #fff;
-  margin-bottom: 7px;
-  padding: 0;
-  text-align: center;
-}
-#container_aluno .boletim {
-  background-color: #fff;
-  border-radius: 20px;
-  margin-top: 50px;
-  padding: 2rem 4rem;
-}
-#container_aluno .boletim th {
-  font-size: 2rem;
-  text-align: center;
-  font-weight: bold;
-  padding: 10px 25px;
-}
-#container_aluno .boletim td {
-  font-size: 1.4rem;
-  text-align: center;
-  padding: 10px 25px;
-  border-bottom: 1px solid #ccc;
-}
 
 @media (min-width: 769px) {
   #home {
@@ -248,4 +213,43 @@ form#infos #render_notas p {font-size: 12px; font-weight: bold; text-align: left
     align-items: center;
     justify-content: center;
   }
+}
+
+
+@media (max-width: 800px) {
+  header {padding-right: 15px;}
+  form#infos { max-width: 100%; border-radius: 10px; padding: 30px 20px; }
+  form#infos fieldset {gap: 10px; margin-bottom: 15px;}
+  form#infos label {font-size: 12px;}
+  form#infos input,
+  form#infos textarea,
+  form#infos select {font-size: 12px;}
+  
+  form#infos button,
+  form#infos a {font-size: 14px;}
+  
+  form#infos #aluno_nome {font-size: 14px; margin-bottom: 15px;}
+  form#infos #render_notas p {font-size: 11px;}
+    
+  /* Boletim Aluno */
+  #container_aluno .container_title h1 {font-size: 2rem;}
+  #container_aluno .container_title p {font-size: 1.2rem; }
+  #container_aluno .boletim {border-radius: 20px; margin: 30px auto 0; padding: 1.5rem 1rem; max-width: 100%; table-layout: fixed;}
+  #container_aluno .boletim th {font-size: 1.2rem; padding: 10px}
+  #container_aluno .boletim td {font-size: 1.1rem; padding: 10px;}
+
+  #container_painel .box-botoes {margin-bottom: 30px; gap: 10px; flex-wrap: wrap;}
+  #container_painel .box-botoes a {padding: 8px 10px; font-size: 1.1rem; border-radius: 10px;}
+  #container_painel .box-infos {padding: 20px; border-radius: 20px; max-width: 100%; width: 100%; margin: 0 auto 30px auto;}
+  #container_painel .box-infos h1 {font-size: 2rem; margin: 0 0 15px;}
+  #container_painel .box-infos h2 {font-size: 1.5rem;}
+  #container_painel .box-infos div {gap: 10px; margin-top: 20px;}
+  #container_painel .box-infos div label {display: block; font-size: 1.2rem;}
+  #container_painel .box-infos div select {padding: 8px; font-size: 1.2rem;}
+  #container_painel .box-alunos {padding: 20px; border-radius: 20px; max-width: 100%; width: 100%;}
+  #container_painel .box-alunos a {font-size: 1.5rem;}
+
+  #modal .content .container { padding: 2rem 1.5rem; max-width: 100%;}
+  #modal .content .container .modal_title {font-size: 1.5rem;}
+  #modal .content .container p {font-size: 1.2rem;}
 }

@@ -14,6 +14,13 @@ conexao = mysql.connector.connect(
     port="22938"
 )
 
+# conexao = mysql.connector.connect(
+#     host="localhost",    
+#     user="root",
+#     password="",
+#     database="projeto_escola",
+# )
+
 if conexao.is_connected():
     print("Conexão bem-sucedida!")
 

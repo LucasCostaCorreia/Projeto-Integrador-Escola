@@ -4,10 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Consultar Informações do Aluno</title>
-    <link
-      href="https://fonts.googleapis.com/css/2?family=Itim&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
-      rel="stylesheet"
-    />
     <link rel="stylesheet" href="./../static/css/styles.css" />
     <link rel="stylesheet" href="./../static/css/home.css" />
   </head>
@@ -27,47 +23,51 @@
           </ul>
         </nav>
       </header>
-      <main>
-        <section id="container_aluno" class="home-content">
-          {% if alunos %} {% for aluno in alunos %}
-          <div class="container_title">
-            <h1>Boletim do(a) aluno(a) {{ aluno.nome }}</h1>
-            <h2>RA: {{ aluno.ra }}</h2>
-            <div>
-              <p>Data de atualização: 18/05/2024 - 23:30:00</p>
-              <p>Americana - SP</p>
-              <p>EMEI Patativa</p>
+      <main id="container_aluno" class="home-content">
+        <div class="indent">
+          <section>
+            {% if alunos %} {% for aluno in alunos %}
+            <div class="container_title">
+              <h1>Boletim do(a) aluno(a) {{ aluno.nome }}</h1>
+              <h2>RA: {{ aluno.ra }}</h2>
+              <div>
+                <p>Data de atualização: 18/05/2024 - 23:30:00</p>
+                <p>Americana - SP</p>
+                <p>EMEI Patativa</p>
+              </div>
             </div>
-          </div>
-          <table class="boletim">
-            <thead>
-              <tr>
-                <th>Matéria</th>
-                <th>Frequência</th>
-                <th>Nota</th>
-                <th>Observações</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% if aluno.materias %} {% for materia in aluno.materias %}
-              <tr>
-                <td>{{ materia.materia }}</td>
-                <td>100%</td>
-                <td>{{ materia.nota }}</td>
-                <td>{{ materia.observacao if materia.observacao else '-' }}</td>
-              </tr>
-              {% endfor %} {% else %}
-              <tr>
-                <td colspan="4">Nenhuma matéria encontrada</td>
-              </tr>
-              {% endif %}
-            </tbody>
-          </table>
-          {% endfor %} {% else %}
-          <p class="erro">{{ erro }}</p>
-          <a href="/consultar" class="back">Voltar</a>
-          {% endif %}
-        </section>
+            <table class="boletim">
+              <thead>
+                <tr>
+                  <th>Matéria</th>
+                  <th>Frequência</th>
+                  <th>Nota</th>
+                  <th>Observações</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% if aluno.materias %} {% for materia in aluno.materias %}
+                <tr>
+                  <td>{{ materia.materia }}</td>
+                  <td>100%</td>
+                  <td>{{ materia.nota }}</td>
+                  <td>
+                    {{ materia.observacao if materia.observacao else '-' }}
+                  </td>
+                </tr>
+                {% endfor %} {% else %}
+                <tr>
+                  <td colspan="4">Nenhuma matéria encontrada</td>
+                </tr>
+                {% endif %}
+              </tbody>
+            </table>
+            {% endfor %} {% else %}
+            <p class="erro">{{ erro }}</p>
+            <a href="/consultar" class="back">Voltar</a>
+            {% endif %}
+          </section>
+        </div>
       </main>
       <footer>
         <p>Copyright © 2024. All rights reserved.</p>
