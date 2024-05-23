@@ -10,7 +10,7 @@ conexao = mysql.connector.connect(
     host="roundhouse.proxy.rlwy.net",       # Endereço do servidor MySQL
     user="root",     # Nome de usuário do MySQL
     password="JoQtogIVbCYqpXsVwvEFmyeimFZlZaXj",   # Senha do MySQL
-    database="projeto_escola",  # Nome do banco de dados
+    database="railway",  # Nome do banco de dados
     port="22938"
 )
 
