@@ -7,10 +7,11 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'PJI1102023;'
 
 conexao = mysql.connector.connect(
-    host="localhost",       # Endereço do servidor MySQL
+    host="roundhouse.proxy.rlwy.net",       # Endereço do servidor MySQL
     user="root",     # Nome de usuário do MySQL
-    password="",   # Senha do MySQL
-    database="projeto_escola"  # Nome do banco de dados
+    password="JoQtogIVbCYqpXsVwvEFmyeimFZlZaXj",   # Senha do MySQL
+    database="projeto_escola",  # Nome do banco de dados
+    port="22938"
 )
 
 if conexao.is_connected():

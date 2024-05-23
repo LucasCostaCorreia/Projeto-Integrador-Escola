@@ -3,11 +3,11 @@
   padding: 0;
   box-sizing: border-box;
   scroll-behavior: smooth;
+  font-family: "Itim", cursive;
 }
 
 :root {
   font-size: 62.5%;
-  font-family: "Itim", cursive;
   --text-H2-color: #e84b23;
   --text-p-color: #737373;
   --text-menu-color: #ffffff;
